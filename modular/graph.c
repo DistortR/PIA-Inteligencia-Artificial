@@ -87,11 +87,11 @@ void printGraph(Graph *g) {
         printf("\n  [%s] (h=%.1f)\n", node->name, node->heuristic);
 
         if (node->children == NULL){
-            printf("    └── (sin hijos)\n");
+            printf("    \\-- (sin hijos)\n");
         } else{
             Child* child = node->children;
             while (child != NULL) {
-                printf("    %s── costo(%.1f) ──→ [%s]\n", child->next ? "├" : "└", child->cost, child->node->name);
+                printf("    %s-- costo(%.1f) --> [%s]\n", child->next ? "|" : "\\", child->cost, child->node->name);
                 child = child->next;
             }
         }
