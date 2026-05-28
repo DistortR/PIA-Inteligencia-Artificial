@@ -5,8 +5,6 @@
 #include "../libraries/graph.h"
 #include "../libraries/BFS.h"
 
-// ─── Cola ────────────────────────────────────────────────────
-
 void enqueue(Queue **head, Queue **tail, Node *node) {
     Queue *newItem = (Queue *)malloc(sizeof(Queue));
     newItem->node = node;

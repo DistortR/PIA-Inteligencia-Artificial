@@ -3,8 +3,6 @@
 #include "../libraries/graph.h"
 #include "../libraries/DFS.h"
 
-// ─── Stack ────────────────────────────────────────────────────
-
 void push(Stack **top, Node *node, Node *parent) {
     Stack *newItem = (Stack *)malloc(sizeof(Stack));
     newItem->node   = node;
@@ -20,7 +18,7 @@ Stack *pop(Stack **top) {
     return item;
 }
 
-// ─── Lista de visitados ───────────────────────────────────────
+// Lista de visitados
 
 int isVisitedDFS(Stack *list, Node *node) {
     Stack *current = list;
@@ -38,8 +36,6 @@ void addVisitedDFS(Stack **list, Node *node, Node *parent) {
     newItem->next   = *list;
     *list = newItem;
 }
-
-// ─── Reconstruir e imprimir camino ───────────────────────────
 
 void printPathDFS(Stack *visited, Node *start, Node *goal) {
     Node *path[100];
@@ -68,8 +64,6 @@ void printPathDFS(Stack *visited, Node *start, Node *goal) {
     }
     printf("\n  Pasos: %d\n", length - 1);
 }
-
-// ─── DFS principal ────────────────────────────────────────────
 
 void DFS(Node *start, Node *goal) {
     if (start == NULL || goal == NULL) {

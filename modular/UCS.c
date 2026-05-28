@@ -3,8 +3,6 @@
 #include "../libraries/graph.h"
 #include "../libraries/UCS.h"
 
-// ─── Cola de prioridad (ordenada por costo acumulado) ────────
-
 void insertPQ(PQNode **head, Node *node, Node *parent, float cost) {
     PQNode *newItem = (PQNode *)malloc(sizeof(PQNode));
     newItem->node = node;
@@ -34,7 +32,7 @@ PQNode *extractMin(PQNode **head) {
     return min;
 }
 
-// ─── Lista de explorados ─────────────────────────────────────
+// Lista de explorados
 int isExplored(Explored *list, Node *node) {
     Explored *current = list;
     while (current != NULL) {
@@ -53,7 +51,7 @@ void addExplored(Explored **list, Node *node, Node *parent, float cost) {
     *list = newItem;
 }
 
-// ─── Reconstruir e imprimir camino ───────────────────────────
+// Reconstruir e imprimir camino 
 void printPathUCS(Explored *list, Node *start, Node *goal, float totalCost) {
     Node *path[100];
     int length = 0;
@@ -85,7 +83,7 @@ void printPathUCS(Explored *list, Node *start, Node *goal, float totalCost) {
     printf("Pasos: %d\n", length - 1);
 }
 
-// ─── UCS principal ───────────────────────────────────────────
+//
 void UCS(Graph *g, Node *start, Node *goal) {
     if (start == NULL || goal == NULL) {
         printf("Nodo inicio o meta no valido.\n");

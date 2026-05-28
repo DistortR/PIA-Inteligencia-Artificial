@@ -7,6 +7,10 @@
 #include "modular/UCS.c"
 #include "libraries/DFS.h"
 #include "modular/DFS.c"
+#include "libraries/DLS.h"
+#include "modular/DLS.c"
+#include "libraries/IDDFS.h"
+#include "modular/IDDFS.c"
 
 void printOptions();
 void loadDefaultGraph(Graph *g);
@@ -110,11 +114,59 @@ int main(){
                 break;
 
             case 6:
-                //DLS();
+                if (g.head == NULL) {
+                    printf("No hay grafo definido.\n");
+                    break;
+                }
+
+                char startNameDLS[50], goalNameDLS[50];
+                int limitDLS;
+                Node *startDLS, *goalDLS;
+
+                printf("Nodo inicio $");
+                scanf("%s", startNameDLS);
+                printf("Nodo meta $");
+                scanf("%s", goalNameDLS);
+                printf("Limite de profundidad $");
+                scanf("%d", &limitDLS);
+
+                startDLS = findNode(&g, startNameDLS);
+                goalDLS  = findNode(&g, goalNameDLS);
+
+                if (startDLS == NULL)
+                    printf("Nodo '%s' no existe.\n", startNameDLS);
+                else if (goalDLS == NULL)
+                    printf("Nodo '%s' no existe.\n", goalNameDLS);
+                else
+                    DLS(startDLS, goalDLS, limitDLS);
                 break;
 
             case 7:
-                //IDDFS();
+                if (g.head == NULL) {
+                    printf("No hay grafo definido.\n");
+                    break;
+                }
+
+                char startNameIDDFS[50], goalNameIDDFS[50];
+                int maxDepthIDDFS;
+                Node *startIDDFS, *goalIDDFS;
+
+                printf("Nodo inicio $");
+                scanf("%s", startNameIDDFS);
+                printf("Nodo meta $");
+                scanf("%s", goalNameIDDFS);
+                printf("Profundidad maxima $");
+                scanf("%d", &maxDepthIDDFS);
+
+                startIDDFS = findNode(&g, startNameIDDFS);
+                goalIDDFS  = findNode(&g, goalNameIDDFS);
+
+                if (startIDDFS == NULL)
+                    printf("Nodo '%s' no existe.\n", startNameIDDFS);
+                else if (goalIDDFS == NULL)
+                    printf("Nodo '%s' no existe.\n", goalNameIDDFS);
+                else
+                    IDDFS(startIDDFS, goalIDDFS, maxDepthIDDFS);
                 break;
             
             case 8:
@@ -147,7 +199,7 @@ void printOptions(){
     printf("Opcion $");
 }
 void loadDefaultGraph(Graph *g) {
-   
+
     addNode(g, "A", 10.0);
     addNode(g, "B", 3.0);
     addNode(g, "C", 9.0);
