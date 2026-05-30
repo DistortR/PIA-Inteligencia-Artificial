@@ -10,7 +10,6 @@ void insertPQ(PQNode **head, Node *node, Node *parent, float cost) {
     newItem->cost = cost;
     newItem->next = NULL;
 
-    // Insertar en orden ascendente de costo
     if (*head == NULL || cost < (*head)->cost) {
         newItem->next = *head;
         *head = newItem;
@@ -32,7 +31,6 @@ PQNode *extractMin(PQNode **head) {
     return min;
 }
 
-// Lista de explorados
 int isExplored(Explored *list, Node *node) {
     Explored *current = list;
     while (current != NULL) {
@@ -51,7 +49,6 @@ void addExplored(Explored **list, Node *node, Node *parent, float cost) {
     *list = newItem;
 }
 
-// Reconstruir e imprimir camino 
 void printPathUCS(Explored *list, Node *start, Node *goal, float totalCost) {
     Node *path[100];
     int length = 0;
@@ -83,7 +80,6 @@ void printPathUCS(Explored *list, Node *start, Node *goal, float totalCost) {
     printf("Pasos: %d\n", length - 1);
 }
 
-//
 void UCS(Graph *g, Node *start, Node *goal) {
     if (start == NULL || goal == NULL) {
         printf("Nodo inicio o meta no valido.\n");
@@ -104,19 +100,16 @@ void UCS(Graph *g, Node *start, Node *goal) {
         Node *parent = current->parent;
         free(current);
 
-        // Si ya fue explorado con menor costo, ignorar
         if (isExplored(explored, node))
             continue;
 
         addExplored(&explored, node, parent, cost);
         printf("[%s, g=%.1f] ", node->name, cost);
 
-        // Meta encontrada
         if (node == goal) {
             printf("\nMeta '%s' encontrada\n", goal->name);
             printPathUCS(explored, start, goal, cost);
 
-            // Liberar cola y explorados
             while (pq != NULL){
                 PQNode *t = extractMin(&pq);
                 free(t);
@@ -129,7 +122,6 @@ void UCS(Graph *g, Node *start, Node *goal) {
             return;
         }
 
-        // Expandir vecinos
         Child *child = node->children;
         while (child != NULL) {
             if (!isExplored(explored, child->node))

@@ -11,6 +11,10 @@
 #include "modular/DLS.c"
 #include "libraries/IDDFS.h"
 #include "modular/IDDFS.c"
+#include "libraries/GREEDY.h"
+#include "modular/GREEDY.c"
+#include "libraries/ASTAR.h"
+#include "modular/ASTAR.c"
 
 void printOptions();
 void loadDefaultGraph(Graph *g);
@@ -170,11 +174,53 @@ int main(){
                 break;
             
             case 8:
-                //Greedy();
+                if (g.head == NULL) {
+                    printf("No hay grafo definido.\n");
+                    break;
+                }
+
+                char startNameGreedy[50], goalNameGreedy[50];
+                Node *startGreedy, *goalGreedy;
+
+                printf("Nodo inicio $");
+                scanf("%s", startNameGreedy);
+                printf("Nodo meta $");
+                scanf("%s", goalNameGreedy);
+
+                startGreedy = findNode(&g, startNameGreedy);
+                goalGreedy  = findNode(&g, goalNameGreedy);
+
+                if (startGreedy == NULL)
+                    printf("Nodo '%s' no existe.\n", startNameGreedy);
+                else if (goalGreedy == NULL)
+                    printf("Nodo '%s' no existe.\n", goalNameGreedy);
+                else
+                    Greedy(&g, startGreedy, goalGreedy);
                 break;
 
             case 9:
-                //AStar();
+                if (g.head == NULL) {
+                    printf("No hay grafo definido.\n");
+                    break;
+                }
+
+                char startNameAS[50], goalNameAS[50];
+                Node *startAS, *goalAS;
+
+                printf("Nodo inicio $");
+                scanf("%s", startNameAS);
+                printf("Nodo meta $");
+                scanf("%s", goalNameAS);
+
+                startAS = findNode(&g, startNameAS);
+                goalAS  = findNode(&g, goalNameAS);
+
+                if (startAS == NULL)
+                    printf("Nodo '%s' no existe.\n", startNameAS);
+                else if (goalAS == NULL)
+                    printf("Nodo '%s' no existe.\n", goalNameAS);
+                else
+                    AStar(&g, startAS, goalAS);
                 break;
 
             case 0: 
