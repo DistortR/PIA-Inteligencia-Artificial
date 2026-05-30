@@ -21,6 +21,6 @@ GreedyPQ *extractMinGreedy(GreedyPQ **head);
 int isGreedyExplored(GreedyExplored *list, Node *node);
 void addGreedyExplored(GreedyExplored **list, Node *node, Node *parent);
 void printPathGreedy(GreedyExplored *list, Node *start, Node *goal);
-void Greedy(Graph *g, Node *start, Node *goal);
+void Greedy(Node *start, Node *goal);
 
 #endif

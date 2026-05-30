@@ -195,7 +195,7 @@ int main(){
                 else if (goalGreedy == NULL)
                     printf("Nodo '%s' no existe.\n", goalNameGreedy);
                 else
-                    Greedy(&g, startGreedy, goalGreedy);
+                    Greedy(startGreedy, goalGreedy);
                 break;
 
             case 9:
@@ -220,7 +220,7 @@ int main(){
                 else if (goalAS == NULL)
                     printf("Nodo '%s' no existe.\n", goalNameAS);
                 else
-                    AStar(&g, startAS, goalAS);
+                    AStar(startAS, goalAS);
                 break;
 
             case 0: 

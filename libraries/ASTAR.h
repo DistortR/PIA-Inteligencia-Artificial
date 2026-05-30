@@ -24,6 +24,6 @@ AStarPQ *extractMinAStar(AStarPQ **head);
 int isAStarExplored(AStarExplored *list, Node *node);
 void addAStarExplored(AStarExplored **list, Node *node, Node *parent, float g);
 void printPathAStar(AStarExplored *list, Node *start, Node *goal, float totalG);
-void AStar(Graph *g, Node *start, Node *goal);
+void AStar(Node *start, Node *goal);
 
 #endif

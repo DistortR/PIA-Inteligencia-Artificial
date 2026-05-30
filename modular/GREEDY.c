@@ -79,9 +79,7 @@ void printPathGreedy(GreedyExplored *list, Node *start, Node *goal) {
     printf("\nPasos: %d\n", length - 1);
 }
 
-// ─── Greedy principal ────────────────────────────────────────
-
-void Greedy(Graph *g, Node *start, Node *goal) {
+void Greedy(Node *start, Node *goal) {
     if (start == NULL || goal == NULL) {
         printf("[!] Nodo inicio o meta no valido.\n");
         return;

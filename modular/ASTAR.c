@@ -55,16 +55,15 @@ void addAStarExplored(AStarExplored **list, Node *node, Node *parent, float g) {
 
 void printPathAStar(AStarExplored *list, Node *start, Node *goal, float totalG) {
     Node *path[100];
-    int length = 0;
+    int   length = 0;
 
     Node *current = goal;
     while (current != NULL) {
         path[length++] = current;
-        if (current == start)
-            break;
+        if (current == start) break;
 
         AStarExplored *e = list;
-        current = NULL;
+        current          = NULL;
         while (e != NULL) {
             if (e->node == path[length - 1]) {
                 current = e->parent;
@@ -76,29 +75,26 @@ void printPathAStar(AStarExplored *list, Node *start, Node *goal, float totalG) 
 
     printf("\n  Camino encontrado:\n  ");
     for (int i = length - 1; i >= 0; i--) {
-        printf("[%s](g+h=%.1f+%.1f)", path[i]->name, (float)(path[i] == path[length-1] ? 0 : -1), path[i]->heuristic);
-        if (i > 0)
-            printf(" --> ");
+        printf("[%s]", path[i]->name);
+        if (i > 0) printf(" --> ");
     }
 
-    printf("\n\nDetalle del camino:\n");
+    printf("\n\n  Detalle del camino:\n");
     for (int i = length - 1; i >= 0; i--) {
         AStarExplored *e = list;
         float g = 0.0;
         while (e != NULL) {
-            if (e->node == path[i]) {
-                g = e->g;
-                break;
-            }
+            if (e->node == path[i]) { g = e->g; break; }
             e = e->next;
         }
-        printf("[%s] g=%.1f  h=%.1f  f=%.1f\n", path[i]->name, g, path[i]->heuristic, g + path[i]->heuristic);
+        printf("  [%s] g=%.1f  h=%.1f  f=%.1f\n",
+            path[i]->name, g, path[i]->heuristic, g + path[i]->heuristic);
     }
-    printf("\nCosto real total (g): %.1f\n", totalG);
-    printf("Pasos: %d\n", length - 1);
+    printf("\n  Costo real total (g): %.1f\n", totalG);
+    printf("  Pasos: %d\n", length - 1);
 }
 
-void AStar(Graph *g, Node *start, Node *goal) {
+void AStar(Node *start, Node *goal) {
     if (start == NULL || goal == NULL) {
         printf("[!] Nodo inicio o meta no valido.\n");
         return;
