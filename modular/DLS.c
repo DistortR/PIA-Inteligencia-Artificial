@@ -73,7 +73,7 @@ void DLS(Node *start, Node *goal, int limit) {
 
     StackDLS *stack   = NULL;
     StackDLS *visited = NULL;
-    int cutoff = 0; // hubo alguna rama cortada por el limite?
+    int cutoff = 0; 
 
     pushDLS(&stack, start, NULL, 0);
 
@@ -105,15 +105,15 @@ void DLS(Node *start, Node *goal, int limit) {
 
         if (depth >= limit) {
             cutoff = 1;
-            continue; // rama cortada, no expandir hijos
+            continue; 
         }
 
-        // Apilar hijos en orden inverso
+
         Node *children[100];
         int count = 0;
         Child *child = current->children;
         while (child != NULL) {
-            if (!isVisitedDLS(visited, child->node))
+            if (!isVisitedDLS(visited, child->node) && !isVisitedDLS(stack, child->node))
                 children[count++] = child->node;
             child = child->next;
         }
